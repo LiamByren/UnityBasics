@@ -10,7 +10,8 @@ public class BulletMover : MonoBehaviour {
     public int maxbounce;
     public GameObject parent;
     public PlayerController pc;
-    public Sprite sprite1;
+    public Sprite RedBounce;
+    public Sprite BlueBounce;
 
     private Rigidbody2D rig;
     private int bouncecount = 0;
@@ -20,13 +21,21 @@ public class BulletMover : MonoBehaviour {
     void Start () {
         rig = GetComponent<Rigidbody2D>();
         rig.velocity = -speed*transform.up;
+
+        //Red Lasers for Player 1 Blue Lasers for Player 2
         if (color.Equals("Red"))
         {
             parent = GameObject.Find("Player 1");
             pc = parent.GetComponent<PlayerController>();
         }
-       
-       
+
+        if (color.Equals("Blue"))
+        {
+            parent = GameObject.Find("Player 2");
+            pc = parent.GetComponent<PlayerController>();
+        }
+
+
 
     }
 	
@@ -37,6 +46,7 @@ public class BulletMover : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        //If collision with the parent after a bounce destory the bullet
         if (other.name.Equals(parent.name))
         {
             if (bouncecount > 0)
@@ -47,11 +57,23 @@ public class BulletMover : MonoBehaviour {
         }
         else
 
+
+        //Bounce off walls Method
+        //Correct angle of bounce calculated with parallel and perpendiclar vectors
         if (other.tag.Equals("Boundary")){
             bouncecount++;
 
+            //Change color of bullet when it bounces
             spriteRenderer = GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = sprite1;
+            if (color.Equals("Red"))
+            {
+                spriteRenderer.sprite = RedBounce;
+            }
+            else
+            {
+                spriteRenderer.sprite = BlueBounce;
+            }
+           
 
             float normal = other.transform.rotation.eulerAngles.z - 90;
             if (normal < 0)

@@ -13,6 +13,8 @@ public class TurretScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        
+        //If Player 1 moves across half way line, begin to lock on
         if (Player1.transform.position.x >= 0)
         {
             float angle = Mathf.Atan2(Player1.transform.position.x - transform.position.x, Player1.transform.position.y - transform.position.y) / Mathf.PI * 180;

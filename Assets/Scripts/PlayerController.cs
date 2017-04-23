@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+    //Aquire input for rotating
     private void CalRotate()
     {
         if (Input.GetKey(KeyCode.Keypad4))
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour {
     }
 
 
+    //Aquire input for movement
     private void CalMovement()
     {
         if (Input.GetKey("right"))

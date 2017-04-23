@@ -15,6 +15,7 @@ public class ObjectSpawner : MonoBehaviour
 
     void Start()
     {
+        // Created boundaries based on camera size
         Camera cam = Camera.main;
         boundary.transform.localScale = new Vector2(0.5f, cam.orthographicSize * 4);
         noman.transform.localScale = new Vector2(2, cam.orthographicSize * 30);
@@ -38,6 +39,7 @@ public class ObjectSpawner : MonoBehaviour
 
     private void Update()
     {
+        //Spawn new ship every 6-10 seconds
         aispawntimer = aispawntimer + Time.deltaTime;
         if ((aispawntimer + aispawnrandom) > aispawntime)
         {

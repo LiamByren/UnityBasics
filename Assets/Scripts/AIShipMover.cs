@@ -8,6 +8,7 @@ public class AIShipMover : MonoBehaviour {
     public GameObject targetimage;
     public float LockTime;
     public bool LockedOn;
+ 
 
     private Rigidbody2D rig;
     private GameObject target;
@@ -15,8 +16,8 @@ public class AIShipMover : MonoBehaviour {
     private Vector2 targetposition;
     private float LockTimeCounter;
     private Vector2 moveorder;
-    private bool inFlight;
-   
+    private bool CoolingDown;
+    private float CoolDownTimer = 0;
 
     // Use this for initialization
     void Start () {
@@ -31,7 +32,12 @@ public class AIShipMover : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Debug.Log(rig.velocity);
+        Debug.Log(rig.angularVelocity);
+
+        //If Locked On, start spinning
+        //If LockTime>LockTimeCounter move towards target
+        //If reached the target stop and wait for Cooldown
+        //If cooled down, aquire new lock
 
         if(LockedOn==true && LockTimeCounter<LockTime)
         {
@@ -45,9 +51,27 @@ public class AIShipMover : MonoBehaviour {
             rig.AddForce(moveorder.normalized*speed);
 
         }
+        if (CoolingDown)
+        {
+            CoolDownTimer = CoolDownTimer + Time.deltaTime;
 
+            if (CoolDownTimer > 1)
+            {
+                CoolDownTimer = 0;
+                CoolingDown = false;
+                LockOn();
+            }
+        }
+    }
 
-
+    //Stop upon reaching the target
+    public void Cooldown()
+    {
+        LockedOn = false;
+        rig.velocity = Vector2.zero;
+        rig.angularVelocity = 0;
+        transform.position = new Vector2(transform.position.x + moveorder.normalized.x, transform.position.y + moveorder.normalized.y);
+        CoolingDown = true;
     }
 
 
