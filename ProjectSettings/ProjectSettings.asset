@@ -463,10 +463,10 @@ PlayerSettings:
   vrEditorSettings: {}
   cloudServicesEnabled:
     Build: 0
-    Collab: 0
+    Collab: 1
     ErrorHub: 0
     Hub: 0
-    UNet: 0
+    UNet: 1
   cloudProjectId: ebbf3c4d-d575-480a-82ee-9a3d1dc44cec
   projectName: Assignment2CSC3020H
   organizationId: theomniscientotter

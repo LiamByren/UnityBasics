@@ -57,6 +57,8 @@ public class BulletMover : MonoBehaviour {
             return;
         }
 
+        //If Collision with AiSHIp destory the ship
+
         if (other.tag.Equals("AIShip")){
             Destroy(gameObject);
             Destroy(other.gameObject);
