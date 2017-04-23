@@ -6,18 +6,24 @@ public class AIShipMover : MonoBehaviour {
     public float rotatespeed;
     public float speed;
     public GameObject targetimage;
+    public float LockTime;
+    public bool LockedOn;
 
     private Rigidbody2D rig;
     private GameObject target;
     private Rigidbody2D targetrig;
     private Vector2 targetposition;
+    private float LockTimeCounter;
+    private Vector2 moveorder;
+    private bool inFlight;
+   
 
     // Use this for initialization
     void Start () {
         rig = GetComponent<Rigidbody2D>();
         target= GameObject.Find("Player 1");
         targetrig = target.GetComponent<Rigidbody2D>();
-
+        LockedOn = false;
         LockOn();
        
     }
@@ -25,18 +31,36 @@ public class AIShipMover : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        rig.angularVelocity = rotatespeed;
+        Debug.Log(rig.velocity);
+
+        if(LockedOn==true && LockTimeCounter<LockTime)
+        {
+            LockTimeCounter = LockTimeCounter + Time.deltaTime;
+            rig.AddTorque(rotatespeed * Time.deltaTime);
+        }
+
+        if(LockedOn==true && LockTimeCounter > LockTime)
+        {
+          
+            rig.AddForce(moveorder.normalized*speed);
+
+        }
+
+
 
     }
 
 
-    private void LockOn()
+    //Locks on to players predicted position and creates a Target at the position
+    public void LockOn()
     {
+        rig.velocity = Vector2.zero;
+        LockTimeCounter = 0;
+        moveorder = new Vector2(targetrig.position.x - rig.position.x, targetrig.position.y - rig.position.y);
         targetposition = targetrig.position;
-        Vector2 moveorder = new Vector2(targetrig.position.x - rig.position.x, targetrig.position.y - rig.position.y);
-        rig.AddForce(moveorder * speed);
         var newTarget =Instantiate(targetimage, targetposition,Quaternion.Euler(0,0,0));
         newTarget.name = gameObject.name + " Target";
+        LockedOn = true;
     }
 
 

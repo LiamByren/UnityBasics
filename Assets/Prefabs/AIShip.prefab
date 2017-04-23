@@ -72,7 +72,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -89,9 +89,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotatespeed: 120
-  speed: 50
+  speed: 45
   targetimage: {fileID: 1234867003238622, guid: ae69962129a9afb47983a0e3c38baf35,
     type: 2}
+  LockTime: 2
 --- !u!212 &212160059477539874
 SpriteRenderer:
   m_ObjectHideFlags: 1
