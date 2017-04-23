@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114253302183256812}
   m_Layer: 0
   m_Name: AIShip
-  m_TagString: Untagged
+  m_TagString: AIShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,11 +88,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a46023c67daa246b0ef554b690c35d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotatespeed: 120
+  rotatespeed: 200
   speed: 45
   targetimage: {fileID: 1234867003238622, guid: ae69962129a9afb47983a0e3c38baf35,
     type: 2}
   LockTime: 2
+  LockedOn: 0
 --- !u!212 &212160059477539874
 SpriteRenderer:
   m_ObjectHideFlags: 1

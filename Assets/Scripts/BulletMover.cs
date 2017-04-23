@@ -52,10 +52,20 @@ public class BulletMover : MonoBehaviour {
             if (bouncecount > 0)
             {
                 Destroy(gameObject);
+                pc.bulletcount--;
             }
             return;
         }
-        else
+
+        if (other.tag.Equals("AIShip")){
+            Destroy(gameObject);
+            Destroy(other.gameObject);
+            Destroy(GameObject.Find(other.name + " Target"));
+            pc.bulletcount--;
+            return;
+        }
+        
+        
 
 
         //Bounce off walls Method

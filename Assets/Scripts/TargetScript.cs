@@ -15,7 +15,8 @@ public class TargetScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        
+        transform.localScale += new Vector3(-0.1f*Time.deltaTime, -0.1f*Time.deltaTime, 0);
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)

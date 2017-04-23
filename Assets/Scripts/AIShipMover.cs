@@ -32,7 +32,7 @@ public class AIShipMover : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Debug.Log(rig.angularVelocity);
+      
 
         //If Locked On, start spinning
         //If LockTime>LockTimeCounter move towards target
@@ -51,13 +51,12 @@ public class AIShipMover : MonoBehaviour {
             rig.AddForce(moveorder.normalized*speed);
 
         }
-        if (CoolingDown)
+        if (CoolingDown==true)
         {
             CoolDownTimer = CoolDownTimer + Time.deltaTime;
 
             if (CoolDownTimer > 1)
             {
-                CoolDownTimer = 0;
                 CoolingDown = false;
                 LockOn();
             }
@@ -67,10 +66,12 @@ public class AIShipMover : MonoBehaviour {
     //Stop upon reaching the target
     public void Cooldown()
     {
+        
         LockedOn = false;
         rig.velocity = Vector2.zero;
         rig.angularVelocity = 0;
-        transform.position = new Vector2(transform.position.x + moveorder.normalized.x, transform.position.y + moveorder.normalized.y);
+        
+        transform.position = new Vector2(targetposition.x,targetposition.y);
         CoolingDown = true;
     }
 
@@ -80,8 +81,10 @@ public class AIShipMover : MonoBehaviour {
     {
         rig.velocity = Vector2.zero;
         LockTimeCounter = 0;
+        CoolDownTimer = 0;
         moveorder = new Vector2(targetrig.position.x - rig.position.x, targetrig.position.y - rig.position.y);
-        targetposition = targetrig.position;
+        moveorder = moveorder + 0.5f*targetrig.velocity;
+        targetposition = targetrig.position + 0.5f*targetrig.velocity;
         var newTarget =Instantiate(targetimage, targetposition,Quaternion.Euler(0,0,0));
         newTarget.name = gameObject.name + " Target";
         LockedOn = true;
