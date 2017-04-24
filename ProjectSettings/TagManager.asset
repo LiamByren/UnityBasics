@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Boundary
   - AIShip
+  - Music
+  - Sentry
+  - Player1 Score
+  - Player2 Score
   layers:
   - Default
   - TransparentFX

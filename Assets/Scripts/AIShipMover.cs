@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AIShipMover : MonoBehaviour {
     public float rotatespeed;
@@ -19,6 +17,7 @@ public class AIShipMover : MonoBehaviour {
     private bool CoolingDown;
     private float CoolDownTimer = 0;
     private bool isQuit = false;
+    private bool normalcollision = true;
     
 
     // Use this for initialization
@@ -34,8 +33,8 @@ public class AIShipMover : MonoBehaviour {
 
     private void OnDestroy()
     {
-        if (!isQuit)
-        {
+        if (isQuit == false && normalcollision == true)
+        {   
             var newExp =Instantiate(explosion, transform.position, transform.rotation);
             Destroy(newExp.gameObject, 1);
         }
@@ -107,13 +106,15 @@ public class AIShipMover : MonoBehaviour {
         LockedOn = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
+            normalcollision = false;
             Destroy(GameObject.Find(gameObject.name + " Target"));
             Destroy(gameObject);
-            Destroy(collision.gameObject);
+            Destroy(other.gameObject);
+
         }
     }
 

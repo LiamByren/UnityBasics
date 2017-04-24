@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -13,11 +14,18 @@ public class PlayerController : MonoBehaviour {
     public GameObject shot;
     public Transform shotSpawn;
     public int bulletcount=0;
+    private bool isQuit;
+    private GameObject Score;
+
 
     // Use this for initialization
     void Start () {
         rotatedirection = 0;
         rig = GetComponent<Rigidbody2D>();
+        isQuit = false;
+        Score = GameObject.Find(gameObject.name + " Score");
+
+
     }
 	
 	// Update is called once per frame
@@ -35,7 +43,13 @@ public class PlayerController : MonoBehaviour {
         }
 
     }
-   
+  
+
+    private void OnApplicationQuit()
+    {
+        isQuit = true;
+    }
+
 
     private void FixedUpdate()
     {

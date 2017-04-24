@@ -61,6 +61,15 @@ public class BulletMover : MonoBehaviour {
             return;
         }
 
+        if (other.tag.Equals("Player"))
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+            ObjectSpawner os = GameObject.Find("Game Controller").GetComponent<ObjectSpawner>();
+            os.ScoreAdjust(parent.name);
+
+        }
+
         //If Collision with AiSHIp destory the ship
 
         if (other.tag.Equals("AIShip")){

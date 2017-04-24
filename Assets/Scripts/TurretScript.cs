@@ -9,13 +9,13 @@ public class TurretScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        if(gameObject.name.Equals("SentryGun 1"))
+        if(gameObject.name.Contains("SentryGun 1"))
         {
 
             Player = GameObject.Find("Player 1");
         }
 
-        if (gameObject.name.Equals("SentryGun 2"))
+        if (gameObject.name.Contains("SentryGun 2"))
         {
             Player = GameObject.Find("Player 2");
         }
@@ -24,6 +24,11 @@ public class TurretScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (Player == null)
+        {
+           return;
+        }
 
         //If Player 1 moves across half way line, begin to lock on
         if (Player.name.Equals("Player 1"))
