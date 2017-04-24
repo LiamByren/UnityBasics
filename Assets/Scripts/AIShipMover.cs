@@ -8,7 +8,7 @@ public class AIShipMover : MonoBehaviour {
     public GameObject targetimage;
     public float LockTime;
     public bool LockedOn;
- 
+    public GameObject explosion;
 
     private Rigidbody2D rig;
     private GameObject target;
@@ -18,6 +18,8 @@ public class AIShipMover : MonoBehaviour {
     private Vector2 moveorder;
     private bool CoolingDown;
     private float CoolDownTimer = 0;
+    private bool isQuit = false;
+    
 
     // Use this for initialization
     void Start () {
@@ -27,10 +29,25 @@ public class AIShipMover : MonoBehaviour {
         LockedOn = false;
         LockOn();
        
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void OnDestroy()
+    {
+        if (!isQuit)
+        {
+            var newExp =Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(newExp.gameObject, 1);
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        isQuit = true;
+    }
+
+    // Update is called once per frame
+    void Update () {
 
       
 
@@ -89,6 +106,18 @@ public class AIShipMover : MonoBehaviour {
         newTarget.name = gameObject.name + " Target";
         LockedOn = true;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Destroy(GameObject.Find(gameObject.name + " Target"));
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
+        }
+    }
+
+
 
 
 }

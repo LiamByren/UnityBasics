@@ -13,6 +13,7 @@ public class BulletMover : MonoBehaviour {
     public Sprite RedBounce;
     public Sprite BlueBounce;
 
+
     private Rigidbody2D rig;
     private int bouncecount = 0;
     private SpriteRenderer spriteRenderer;
@@ -21,6 +22,7 @@ public class BulletMover : MonoBehaviour {
     void Start () {
         rig = GetComponent<Rigidbody2D>();
         rig.velocity = -speed*transform.up;
+       
 
         //Red Lasers for Player 1 Blue Lasers for Player 2
         if (color.Equals("Red"))
@@ -38,9 +40,11 @@ public class BulletMover : MonoBehaviour {
 
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+
+
+    // Update is called once per frame
+    void Update () {
 
     }
 
@@ -60,9 +64,9 @@ public class BulletMover : MonoBehaviour {
         //If Collision with AiSHIp destory the ship
 
         if (other.tag.Equals("AIShip")){
-            Destroy(gameObject);
             Destroy(other.gameObject);
-            Destroy(GameObject.Find(other.name + " Target"));
+            Destroy(GameObject.Find(other.gameObject.name + " Target"));
+            Destroy(gameObject);
             pc.bulletcount--;
             return;
         }
