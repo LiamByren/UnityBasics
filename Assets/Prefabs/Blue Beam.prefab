@@ -92,6 +92,7 @@ MonoBehaviour:
   color: Blue
   maxbounce: 1
   parent: {fileID: 0}
+  explosion: {fileID: 1186905586970626, guid: 1ad137831c7149e4abba00ac881f0b14, type: 2}
   pc: {fileID: 0}
   RedBounce: {fileID: 21300000, guid: caca7092c6b4cd9498878b8bec6e1e64, type: 3}
   BlueBounce: {fileID: 21300000, guid: 2e65c7af4204c4e449c9edcb52c24736, type: 3}

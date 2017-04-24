@@ -68,6 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
+  shot: {fileID: 1214033773631060, guid: a7000d55d0a49b6428a8bf0e29543eed, type: 2}
+  lockontime: 1
 --- !u!212 &212637050879861742
 SpriteRenderer:
   m_ObjectHideFlags: 1

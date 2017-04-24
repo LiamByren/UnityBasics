@@ -5,6 +5,7 @@ using UnityEngine;
 public class TurretScript : MonoBehaviour {
 
     public GameObject Player;
+    public GameObject shot;
     public float lockontime;
     private float lockontimer;
 	// Use this for initialization
@@ -42,8 +43,10 @@ public class TurretScript : MonoBehaviour {
                 lockontimer = lockontimer + Time.deltaTime;
                 if (lockontimer > lockontime)
                 {
-                    Debug.Log("FIRE");
-                    lockontimer = 0;
+                   var newShot = Instantiate(shot, transform.position, Quaternion.Euler(0, 0, 0));
+                    newShot.GetComponent<TurrentShotMover>().parent = gameObject;
+                    newShot.GetComponent<TurrentShotMover>().target = Player;
+                    lockontimer = -5;
                 }
             }
         }
@@ -58,8 +61,10 @@ public class TurretScript : MonoBehaviour {
 
                 if (lockontimer > lockontime)
                 {
-                    Debug.Log("FIRE");
-                    lockontimer = 0;
+                   var newShot= Instantiate(shot, transform.position, Quaternion.Euler(0, 0, 0));
+                    newShot.GetComponent<TurrentShotMover>().parent = gameObject;
+                    newShot.GetComponent<TurrentShotMover>().target = Player;
+                    lockontimer = -5;
                 }
 
             }
