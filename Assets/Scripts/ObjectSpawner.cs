@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObjectSpawner : MonoBehaviour
 {
@@ -49,8 +50,14 @@ public class ObjectSpawner : MonoBehaviour
             aispawntimer = 0;
             aispawnrandom = Random.Range(0, 4);
         }
-
+        // If Escape pressed return to main menu
+        if (Input.GetKey("escape"))
+        {
+            SceneManager.LoadScene("Main Menu");
+        }
     }
 
-
 }
+
+
+

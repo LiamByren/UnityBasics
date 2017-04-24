@@ -11,6 +11,7 @@ public class TurretScript : MonoBehaviour {
 
         if(gameObject.name.Equals("SentryGun 1"))
         {
+
             Player = GameObject.Find("Player 1");
         }
 
