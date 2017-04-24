@@ -15,6 +15,11 @@ public class ObjectSpawner : MonoBehaviour
     public GameObject Sentry1;
     public GameObject Sentry2;
 
+    public float respawntime;
+
+    public GameObject winner1;
+    public GameObject winner2;
+
     public GameObject score1;
     public GameObject score2;
     public Text t1;
@@ -24,10 +29,12 @@ public class ObjectSpawner : MonoBehaviour
     private float aispawnrandom;
     private float aispawntimer;
     private int shipcounter;
+    private bool gameover;
+    private float respawntimer;
 
     void Start()
     {
-        
+
 
         // Created boundaries based on camera size
         Camera cam = Camera.main;
@@ -45,7 +52,8 @@ public class ObjectSpawner : MonoBehaviour
         Instantiate(noman, pos5, Quaternion.Euler(0, 0, 0));
 
         SpawnPlayers();
-
+        gameover = false;
+        respawntimer = 0;
 
         aispawntimer = -2;
         aispawnrandom = Random.Range(0, 3);
@@ -56,38 +64,49 @@ public class ObjectSpawner : MonoBehaviour
 
     private void Update()
     {
-        
+
 
         //Spawn new ship every 6-10 seconds
         aispawntimer = aispawntimer + Time.deltaTime;
         if ((aispawntimer + aispawnrandom) > aispawntime)
         {
-            var newShip= Instantiate(AIShip, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
+            var newShip = Instantiate(AIShip, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
             newShip.name = ("AIShip" + shipcounter);
             shipcounter++;
             aispawntimer = 0;
-            aispawnrandom = Random.Range(0, 4);
+            aispawnrandom = Random.Range(1, 5);
         }
         // If Escape pressed return to main menu
         if (Input.GetKey("escape"))
         {
+            Destroy(GameObject.Find("Canvas"));
             SceneManager.LoadScene("Main Menu");
+        }
+
+        if (gameover)
+        {
+            respawntimer = respawntimer +Time.deltaTime;
+            if (respawntimer > respawntime)
+            {
+                
+                SceneManager.LoadScene("Main Scene");
+            }
         }
     }
 
     public void SpawnPlayers()
 
-        //Reset the game
+    //Reset the game
     {
-        
-        var P1 =Instantiate(Player1, new Vector2(-7, 0), Quaternion.Euler(0, 0, 90));
+
+        var P1 = Instantiate(Player1, new Vector2(-7, 0), Quaternion.Euler(0, 0, 90));
         P1.name = "Player 1";
-        var P2 =Instantiate(Player2, new Vector2(7, -0), Quaternion.Euler(0, 0, -90));
+        var P2 = Instantiate(Player2, new Vector2(7, -0), Quaternion.Euler(0, 0, -90));
         P2.name = "Player 2";
 
         Instantiate(Sentry1, new Vector2(0, 6), Quaternion.Euler(0, 0, 0));
         Instantiate(Sentry2, new Vector2(0, -6), Quaternion.Euler(0, 0, 180));
-      
+
     }
 
     public void ScoreAdjust(string player)
@@ -107,6 +126,7 @@ public class ObjectSpawner : MonoBehaviour
             {
                 t1.text = t1.text + " i";
             }
+            Instantiate(winner1, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
         }
         if (player.Contains("2"))
         {
@@ -118,10 +138,16 @@ public class ObjectSpawner : MonoBehaviour
             {
                 t2.text = t2.text + " i";
             }
+            Instantiate(winner2, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
         }
-        SceneManager.LoadScene("Main Scene");
+
+
+        gameover = true;
+
+
     }
 
+    
 }
 
 

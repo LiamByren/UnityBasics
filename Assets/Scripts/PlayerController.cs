@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
     public int bulletcount=0;
     private bool isQuit;
     private GameObject Score;
+    public GameObject explosion;
 
 
     // Use this for initialization
@@ -43,7 +44,15 @@ public class PlayerController : MonoBehaviour {
         }
 
     }
-  
+
+    private void OnDestroy()
+    {
+        if (!isQuit)
+        {
+         
+        }
+    }
+
 
     private void OnApplicationQuit()
     {

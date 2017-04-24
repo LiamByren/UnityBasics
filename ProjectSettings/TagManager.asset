@@ -10,6 +10,7 @@ TagManager:
   - Sentry
   - Player1 Score
   - Player2 Score
+  - Bullet
   layers:
   - Default
   - TransparentFX

@@ -5,10 +5,12 @@ using UnityEngine;
 public class TurretScript : MonoBehaviour {
 
     public GameObject Player;
-    private float lockontime;
+    public float lockontime;
+    private float lockontimer;
 	// Use this for initialization
 	void Start () {
 
+        lockontimer = 0;
         if(gameObject.name.Contains("SentryGun 1"))
         {
 
@@ -37,7 +39,12 @@ public class TurretScript : MonoBehaviour {
             {
                 float angle = Mathf.Atan2(Player.transform.position.x - transform.position.x, Player.transform.position.y - transform.position.y) / Mathf.PI * 180;
                 transform.rotation = Quaternion.Euler(0, 0, 180 - angle);
-
+                lockontimer = lockontimer + Time.deltaTime;
+                if (lockontimer > lockontime)
+                {
+                    Debug.Log("FIRE");
+                    lockontimer = 0;
+                }
             }
         }
 
@@ -47,6 +54,13 @@ public class TurretScript : MonoBehaviour {
             {
                 float angle = Mathf.Atan2(Player.transform.position.x - transform.position.x, Player.transform.position.y - transform.position.y) / Mathf.PI * 180;
                 transform.rotation = Quaternion.Euler(0, 0, 180 - angle);
+                lockontimer = lockontimer + Time.deltaTime;
+
+                if (lockontimer > lockontime)
+                {
+                    Debug.Log("FIRE");
+                    lockontimer = 0;
+                }
 
             }
         }

@@ -9,6 +9,7 @@ public class BulletMover : MonoBehaviour {
     public string color;
     public int maxbounce;
     public GameObject parent;
+    public GameObject explosion;
     public PlayerController pc;
     public Sprite RedBounce;
     public Sprite BlueBounce;
@@ -67,8 +68,21 @@ public class BulletMover : MonoBehaviour {
             Destroy(gameObject);
             ObjectSpawner os = GameObject.Find("Game Controller").GetComponent<ObjectSpawner>();
             os.ScoreAdjust(parent.name);
+            var newExp = Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(newExp.gameObject, 1);
 
         }
+
+        if (other.name.Contains("Beam"))
+        {
+            Debug.Log("HI");
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+            
+
+        }
+
+
 
         //If Collision with AiSHIp destory the ship
 

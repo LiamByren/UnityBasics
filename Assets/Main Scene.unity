@@ -605,6 +605,11 @@ MonoBehaviour:
   Player2: {fileID: 1655352035880262, guid: f3803c8f530537440a9e8f1413385258, type: 2}
   Sentry1: {fileID: 1754859088245728, guid: 165c63f2ccdacd844b510041637b1c12, type: 2}
   Sentry2: {fileID: 1422722482172678, guid: edce7aba38cb9eb49bbe007e31123dce, type: 2}
+  respawntime: 2
+  winner1: {fileID: 1626422566637668, guid: 90ea46d6cb8ad3e469afa14ab9514842, type: 2}
+  winner2: {fileID: 1619078584513082, guid: c00782af2b5257a439c255d98311a002, type: 2}
   score1: {fileID: 1450886627}
   score2: {fileID: 73507117}
-  aispawntime: 10
+  t1: {fileID: 0}
+  t2: {fileID: 0}
+  aispawntime: 8

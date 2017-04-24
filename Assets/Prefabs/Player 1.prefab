@@ -123,6 +123,7 @@ MonoBehaviour:
   shot: {fileID: 1689550707547376, guid: 959fbe8418d7f4f43b3c6ddd05788ed1, type: 2}
   shotSpawn: {fileID: 4931157675911450}
   bulletcount: 0
+  explosion: {fileID: 1186905586970626, guid: 1ad137831c7149e4abba00ac881f0b14, type: 2}
 --- !u!212 &212076463441118572
 SpriteRenderer:
   m_ObjectHideFlags: 1
