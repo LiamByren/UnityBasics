@@ -18,6 +18,8 @@ public class AIShipMover : MonoBehaviour {
     private float CoolDownTimer = 0;
     private bool isQuit = false;
     private bool normalcollision = true;
+    public AudioSource audio;
+    public ObjectSpawner gc;
     
 
     // Use this for initialization
@@ -31,7 +33,9 @@ public class AIShipMover : MonoBehaviour {
         {
             target = GameObject.Find("Player 2");
         }
+        audio = GetComponent<AudioSource>();
         targetrig = target.GetComponent<Rigidbody2D>();
+        gc = GameObject.Find("Game Controller").GetComponent<ObjectSpawner>();
         LockedOn = false;
         LockOn();
        
@@ -40,7 +44,7 @@ public class AIShipMover : MonoBehaviour {
 
     private void OnDestroy()
     {
-        if (isQuit == false && normalcollision == true)
+        if (isQuit == false && normalcollision == true && gc.gameover==false)
         {   
             var newExp =Instantiate(explosion, transform.position, transform.rotation);
             Destroy(newExp.gameObject, 1);
@@ -55,7 +59,13 @@ public class AIShipMover : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-      
+        if (gc.gameover)
+        {
+            rig.velocity = Vector2.zero;
+            rig.angularVelocity = 0;
+            audio.Stop();
+            return;
+        }
 
         //If Locked On, start spinning
         //If LockTime>LockTimeCounter move towards target
@@ -89,7 +99,7 @@ public class AIShipMover : MonoBehaviour {
     //Stop upon reaching the target
     public void Cooldown()
     {
-        
+        audio.Stop();
         LockedOn = false;
         rig.velocity = Vector2.zero;
         rig.angularVelocity = 0;
@@ -102,6 +112,8 @@ public class AIShipMover : MonoBehaviour {
     //Locks on to players predicted position and creates a Target at the position
     public void LockOn()
     {
+        
+        audio.Play();
         rig.velocity = Vector2.zero;
         LockTimeCounter = 0;
         CoolDownTimer = 0;
@@ -117,7 +129,7 @@ public class AIShipMover : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player"&&gc.gameover==false)
         {
             normalcollision = false;
             Destroy(GameObject.Find(gameObject.name + " Target"));

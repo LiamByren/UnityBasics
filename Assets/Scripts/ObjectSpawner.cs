@@ -29,8 +29,9 @@ public class ObjectSpawner : MonoBehaviour
     private float aispawnrandom;
     private float aispawntimer;
     private int shipcounter;
-    private bool gameover;
+    public bool gameover;
     private float respawntimer;
+
 
     void Start()
     {
@@ -55,7 +56,7 @@ public class ObjectSpawner : MonoBehaviour
         gameover = false;
         respawntimer = 0;
 
-        aispawntimer = -2;
+        aispawntimer = -1;
         aispawnrandom = Random.Range(0, 3);
         shipcounter = 0;
 
@@ -70,11 +71,11 @@ public class ObjectSpawner : MonoBehaviour
         aispawntimer = aispawntimer + Time.deltaTime;
         if ((aispawntimer + aispawnrandom) > aispawntime)
         {
-            var newShip = Instantiate(AIShip, new Vector2(0, 0), Quaternion.Euler(0, 0, 0));
+            var newShip = Instantiate(AIShip, new Vector2(0,0), Quaternion.Euler(0, 0, 0));
             newShip.name = ("AIShip" + shipcounter);
             shipcounter++;
             aispawntimer = 0;
-            aispawnrandom = Random.Range(1, 5);
+            aispawnrandom = Random.Range(1, 4);
         }
         // If Escape pressed return to main menu
         if (Input.GetKey("escape"))

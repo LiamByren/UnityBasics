@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4106308623065888}
   - component: {fileID: 212407812835108498}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Player2Winner
   m_TagString: Untagged
   m_Icon: {fileID: 0}

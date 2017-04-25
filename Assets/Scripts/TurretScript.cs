@@ -8,9 +8,10 @@ public class TurretScript : MonoBehaviour {
     public GameObject shot;
     public float lockontime;
     private float lockontimer;
+    public ObjectSpawner gc;
 	// Use this for initialization
 	void Start () {
-
+        gc = GameObject.Find("Game Controller").GetComponent<ObjectSpawner>();
         lockontimer = 0;
         if(gameObject.name.Contains("SentryGun 1"))
         {
@@ -27,6 +28,11 @@ public class TurretScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (gc.gameover)
+        {
+            return;
+        }
 
         if (Player == null)
         {

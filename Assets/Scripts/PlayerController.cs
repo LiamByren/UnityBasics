@@ -31,13 +31,13 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Keypad8)&&bulletcount<3&&gameObject.name.Equals("Player 1"))
+        if (Input.GetKeyDown(KeyCode.Keypad8)&&bulletcount<3&&gameObject.name.Equals("Player 2"))
         {
             Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
             bulletcount++;
         }
 
-        if (Input.GetKeyDown(KeyCode.I) && bulletcount < 3 && gameObject.name.Equals("Player 2"))
+        if (Input.GetKeyDown(KeyCode.I) && bulletcount < 3 && gameObject.name.Equals("Player 1"))
         {
             Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
             bulletcount++;
@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour {
     //Aquire input for rotating
     private void CalRotate()
     {
-        if (gameObject.name.Equals("Player 1")) { 
+        if (gameObject.name.Equals("Player 2")) { 
 
         if (Input.GetKey(KeyCode.Keypad4))
         {
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour {
 
         }
 
-        if (gameObject.name.Equals("Player 2"))
+        if (gameObject.name.Equals("Player 1"))
         {
 
             if (Input.GetKey(KeyCode.J))
@@ -145,57 +145,6 @@ public class PlayerController : MonoBehaviour {
     {
         if (gameObject.name.Equals("Player 1"))
         {
-            if (Input.GetKey("right"))
-            {
-                moveHorizontal = moveHorizontal + Time.deltaTime * 4;
-                if (moveHorizontal > 1)
-                {
-                    moveHorizontal = 1;
-                }
-
-            }
-
-            if (Input.GetKey("left"))
-            {
-                moveHorizontal = moveHorizontal - Time.deltaTime * 4;
-                if (moveHorizontal < -1)
-                {
-                    moveHorizontal = -1;
-                }
-            }
-
-            if (!Input.GetKey("left") && !Input.GetKey("right"))
-            {
-                moveHorizontal = Mathf.MoveTowards(moveHorizontal, 0, Time.deltaTime * 3);
-            }
-
-
-            if (Input.GetKey("down"))
-            {
-                moveVertical = moveVertical - Time.deltaTime * 4;
-                if (moveVertical < -1)
-                {
-                    moveVertical = -1;
-                }
-            }
-
-            if (Input.GetKey("up"))
-            {
-                moveVertical = moveVertical + Time.deltaTime * 4;
-                if (moveVertical > 1)
-                {
-                    moveVertical = 1;
-                }
-            }
-
-            if (!Input.GetKey("up") && !Input.GetKey("down"))
-            {
-                moveVertical = Mathf.MoveTowards(moveVertical, 0, Time.deltaTime * 3);
-            }
-        }
-
-        if (gameObject.name.Equals("Player 2"))
-        {
             if (Input.GetKey(KeyCode.D))
             {
                 moveHorizontal = moveHorizontal + Time.deltaTime * 4;
@@ -215,7 +164,7 @@ public class PlayerController : MonoBehaviour {
                 }
             }
 
-            if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+            if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
             {
                 moveHorizontal = Mathf.MoveTowards(moveHorizontal, 0, Time.deltaTime * 3);
             }
@@ -240,6 +189,57 @@ public class PlayerController : MonoBehaviour {
             }
 
             if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
+            {
+                moveVertical = Mathf.MoveTowards(moveVertical, 0, Time.deltaTime * 3);
+            }
+        }
+
+        if (gameObject.name.Equals("Player 2"))
+        {
+            if (Input.GetKey("right"))
+            {
+                moveHorizontal = moveHorizontal + Time.deltaTime * 4;
+                if (moveHorizontal > 1)
+                {
+                    moveHorizontal = 1;
+                }
+
+            }
+
+            if (Input.GetKey("left"))
+            {
+                moveHorizontal = moveHorizontal - Time.deltaTime * 4;
+                if (moveHorizontal < -1)
+                {
+                    moveHorizontal = -1;
+                }
+            }
+
+            if (!Input.GetKey("right") && !Input.GetKey("left"))
+            {
+                moveHorizontal = Mathf.MoveTowards(moveHorizontal, 0, Time.deltaTime * 3);
+            }
+
+
+            if (Input.GetKey("down"))
+            {
+                moveVertical = moveVertical - Time.deltaTime * 4;
+                if (moveVertical < -1)
+                {
+                    moveVertical = -1;
+                }
+            }
+
+            if (Input.GetKey("up"))
+            {
+                moveVertical = moveVertical + Time.deltaTime * 4;
+                if (moveVertical > 1)
+                {
+                    moveVertical = 1;
+                }
+            }
+
+            if (!Input.GetKey("up") && !Input.GetKey("down"))
             {
                 moveVertical = Mathf.MoveTowards(moveVertical, 0, Time.deltaTime * 3);
             }

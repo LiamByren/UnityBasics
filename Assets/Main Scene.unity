@@ -612,4 +612,5 @@ MonoBehaviour:
   score2: {fileID: 73507117}
   t1: {fileID: 0}
   t2: {fileID: 0}
-  aispawntime: 8
+  aispawntime: 7
+  gameover: 0

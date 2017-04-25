@@ -21,7 +21,7 @@ public class MenuScript : MonoBehaviour {
     }
     public void Help()
     {
-        SceneManager.LoadScene("Help Scene");
+        SceneManager.LoadScene("Help Menu");
     }
     public void Exit()
     {

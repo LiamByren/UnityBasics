@@ -11,23 +11,32 @@ public class TurrentShotMover : MonoBehaviour {
     private Rigidbody2D targetrig;
     private Vector2 moveorder;
     public GameObject explosion;
+    public ObjectSpawner gc;
 
 	// Use this for initialization
 	void Start () {
         rig = GetComponent<Rigidbody2D>();
         targetrig = target.GetComponent<Rigidbody2D>();
         rig.angularVelocity = 150;
+        gc = GameObject.Find("Game Controller").GetComponent<ObjectSpawner>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if (gc.gameover)
+        {
+            rig.velocity = Vector2.zero;
+            rig.angularVelocity = 0;
+            return;
+        }
+
         moveorder = new Vector2(targetrig.position.x - rig.position.x, targetrig.position.y - rig.position.y);
         rig.velocity=moveorder.normalized * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && gc.gameover == false)
         {
             
             Destroy(GameObject.Find(gameObject.name + " Target"));
